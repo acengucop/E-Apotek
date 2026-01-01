@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'corsheaders',    # Untuk mengizinkan akses dari Frontend (React/Next.js)
 
     # --- TAMBAHAN: Aplikasi Lokal ---
-    'api',            # Aplikasi yang baru kita buat
+              # Aplikasi yang baru kita buat
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [

@@ -72,7 +72,7 @@ const Navbar = () => {
                   fontSize: { xs: '1.1rem', md: '1.25rem' }
                 }}
               >
-                Apotek Sehat
+                Apotek Menara
               </Typography>
             </Box>
 

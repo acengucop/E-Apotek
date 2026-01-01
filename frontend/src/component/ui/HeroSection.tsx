@@ -1,13 +1,15 @@
 import { Box, Container, Typography, Button, Chip, Paper } from '@mui/material';
-// FIX: Import Grid dari Unstable_Grid2 (Kompatibel v5/v6/v7)
 import Grid from '@mui/material/Grid';
 
-// FIX: Direct Import Icons
 import LocalPharmacy from '@mui/icons-material/LocalPharmacy';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 import WhatsApp from '@mui/icons-material/WhatsApp';
 
 import { type HeroSlide } from '../../lib/api';
+
+// 1. IMPORT GAMBAR LOKAL ANDA DI SINI
+// Pastikan path-nya benar sesuai struktur folder Anda
+import heroBg from '../../assets/HD-wallpaper-interior-pharmacy-cute-pharmacy.jpg';
 
 interface HeroSectionProps {
   slides: HeroSlide[];
@@ -17,15 +19,21 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
   return (
     <Box 
       sx={{ 
-        // UI IMPROVEMENT: Gradient Background halus (Emerald to White)
-        background: 'linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%)', 
-        pt: { xs: 4, md: 12 }, // Mobile: Padding atas kecil, Desktop: Besar
+        // 2. GUNAKAN VARIABEL GAMBAR DI SINI
+        // Teknik Overlay: Gradient Putih Transparan + Gambar Background
+        backgroundImage: `linear-gradient(135deg, rgba(236, 253, 245, 0.90) 0%, rgba(255, 255, 255, 0.95) 100%), url(${heroBg})`,
+        
+        backgroundSize: 'cover',   
+        backgroundPosition: 'center', 
+        backgroundRepeat: 'no-repeat',
+        
+        pt: { xs: 4, md: 12 }, 
         pb: { xs: 8, md: 12 }, 
         position: 'relative', 
         overflow: 'hidden' 
       }}
     >
-      {/* Dekorasi Background (Lingkaran Hijau Samar di pojok) */}
+      {/* Dekorasi Background (Lingkaran Hijau Samar) */}
       <Box sx={{ 
         position: 'absolute', top: -100, right: -100, width: 400, height: 400, 
         bgcolor: '#059669', opacity: 0.05, borderRadius: '50%', zIndex: 0 
@@ -33,14 +41,9 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         
-        {/* GRID CONTAINER */}
         <Grid container spacing={{ xs: 6, md: 4 }} alignItems="center">
           
-          {/* BAGIAN 1: TEXT & CTA (Call to Action) */}
-          {/* ORDER LOGIC: 
-              xs: 2 -> Di HP, teks ada di urutan kedua (bawah)
-              md: 1 -> Di Laptop, teks ada di urutan pertama (kiri)
-          */}
+          {/* BAGIAN 1: TEXT & CTA */}
           <Grid 
             size={{ xs: 12, md: 6 }} 
             sx={{ order: { xs: 2, md: 1 }, textAlign: { xs: 'center', md: 'left' } }}
@@ -51,7 +54,6 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
               sx={{ mb: 2, fontWeight: 'bold', bgcolor: '#d1fae5', color: '#059669' }} 
             />
             
-            {/* Typography Responsif (Clamp) */}
             <Typography 
               variant="h1" 
               color="text.primary" 
@@ -59,7 +61,6 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
               sx={{ 
                 lineHeight: 1.2, 
                 fontWeight: 800,
-                // Font size mengecil otomatis di HP
                 fontSize: { xs: '2.25rem', sm: '3rem', md: '3.75rem' } 
               }}
             >
@@ -74,7 +75,7 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
               sx={{ 
                 mb: 4, 
                 fontWeight: 400,
-                fontSize: { xs: '1rem', md: '1.125rem' }, // Font body nyaman dibaca
+                fontSize: { xs: '1rem', md: '1.125rem' }, 
                 lineHeight: 1.6,
                 maxWidth: { xs: '100%', md: '90%' }
               }}
@@ -87,7 +88,7 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
               sx={{ 
                 display: 'flex', 
                 gap: 2, 
-                flexDirection: { xs: 'column', sm: 'row' }, // HP: Stack vertikal, Tablet+: Horizontal
+                flexDirection: { xs: 'column', sm: 'row' }, 
                 justifyContent: { xs: 'center', md: 'flex-start' } 
               }}
             >
@@ -129,11 +130,7 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
             </Box>
           </Grid>
 
-          {/* BAGIAN 2: GAMBAR HERO */}
-          {/* ORDER LOGIC: 
-              xs: 1 -> Di HP, gambar muncul duluan (atas)
-              md: 2 -> Di Laptop, gambar di kanan
-          */}
+          {/* BAGIAN 2: GAMBAR HERO (SLIDER / ILLUSTRATION) */}
           <Grid 
             size={{ xs: 12, md: 6 }} 
             sx={{ order: { xs: 1, md: 2 } }}
@@ -144,7 +141,6 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
                   position: 'relative',
                   display: 'flex',
                   justifyContent: 'center',
-                  // Efek bayangan radial di bawah gambar agar terlihat melayang
                   '&::before': {
                     content: '""',
                     position: 'absolute',
@@ -163,16 +159,13 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
                   sx={{ 
                     width: '100%', 
                     maxWidth: 500,
-                    // Batasi tinggi gambar di HP agar konten teks tidak terlalu ke bawah
                     maxHeight: { xs: 280, md: 500 }, 
                     objectFit: 'contain',
                     filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))',
-                    // Animasi floating (naik turun halus)
                     animation: 'float 6s ease-in-out infinite',
                     zIndex: 1
                   }}
                 />
-                 {/* Definisi Keyframes untuk animasi */}
                  <style>
                     {`
                       @keyframes float {
@@ -184,7 +177,6 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
                   </style>
               </Box>
             ) : (
-              // Fallback jika API kosong
               <Paper 
                 elevation={0}
                 sx={{ 

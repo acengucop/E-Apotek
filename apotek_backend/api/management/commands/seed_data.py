@@ -42,7 +42,7 @@ class Command(BaseCommand):
 
         self.stdout.write('Membuat Site Settings...')
         SiteSetting.objects.create(
-            nama_apotek="Apotek Sehat Keluarga",
+            nama_apotek="Apotek Menara Keluarga",
             alamat="Jl. Jendral Sudirman No. 45, Pekanbaru, Riau",
             no_telepon="+62 812-3456-7890",
             email="info@apoteksehat.id",

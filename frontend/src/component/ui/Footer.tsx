@@ -6,7 +6,7 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, md: 4 }}>
-            <Typography variant="h6" gutterBottom fontWeight="bold">Apotek Sehat</Typography>
+            <Typography variant="h6" gutterBottom fontWeight="bold">Apotek Menara</Typography>
             <Typography variant="body2" sx={{ opacity: 0.7 }}>
               Melayani dengan hati untuk kesehatan masyarakat Indonesia.
             </Typography>
